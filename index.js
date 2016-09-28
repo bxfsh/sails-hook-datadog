@@ -1,3 +1,5 @@
+var datadog = require("dogapi");
+var os = require("os");
 
 module.exports = function (sails) {
 
