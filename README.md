@@ -15,7 +15,6 @@ config/datadog.js
 ```js
 module.exports.datadog = {
   active: true,
-  silenceDev: true, // defaults to false
   app_key: 'app_key',
   api_key: 'api_key'
 };
