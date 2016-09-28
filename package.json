@@ -1,0 +1,11 @@
+{
+  "name": "@bxfsh/sails-hook-datadog",
+  "version": "1.0.0",
+  "description": "connect sails logs and datadog events",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Daniel Oliveira <daniel@boxfish.com> (https://boxfish.com)",
+  "license": "ISC"
+}
