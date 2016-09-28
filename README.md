@@ -20,3 +20,7 @@ module.exports.datadog = {
   api_key: 'api_key'
 };
 ```
+## Usage
+
+If active in the configuration file any `sails.log.info()`, `sails.log.error()`, or
+`sails.log.success()` will be sent to datadog.
