@@ -21,6 +21,16 @@ module.exports = function (sails) {
         `version: ${version}`
       ];
 
+      if (!sails.config.datadog) {
+
+        sails.log.warn(
+          'You have installed [sails-hook-datadog] but you are ' +
+          'missing the configuration.' +
+          'check https://github.com/bxfsh/sails-hook-datadog for more info');
+
+        return cb();
+      }
+
       /**
        * Initialise datadog API
        * @return {[type]} [description]
@@ -77,7 +87,7 @@ module.exports = function (sails) {
           // sending datadog event if active
           if (sails.config.datadog.active) {
             var title =  `INFO: ${name} ${sails.config.env}`;
-            var text = JSON.stringify(args) + (new Error().stack);
+            var text = JSON.stringify(args);
             var properties = {
               tags: tags,
               alert_type: 'info'
