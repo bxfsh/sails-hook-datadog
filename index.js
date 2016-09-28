@@ -9,14 +9,6 @@ module.exports = function (sails) {
      * Intialise the hook
      */
     initialize: function(cb) {
-      sails.log.info('[sails-hook-datadog] Initialising'.green);
-      return cb();
-    },
-
-    /**
-     * Configure the hook
-     */
-    configure: () => {
 
       // getting name and version from the parent package.json
       var package = require('../../../package.json')
@@ -121,15 +113,20 @@ module.exports = function (sails) {
 
       };
 
-      sails.on('lifted', function() {
+      initialiseDataDogApi();
+      overrideErrorLog();
+      overrideInfoLog();
+      createSuccessLog();
 
-        console.log('Boxfish \\o/'.rainbow);
+      sails.log.info('[sails-hook-datadog]', `${name} datadog has been initialised`)
 
-        initialiseDataDogApi();
-        overrideErrorLog();
-        overrideInfoLog();
-        createSuccessLog();
-      });
+      return cb();
+    },
+
+    /**
+     * Configure the hook
+     */
+    configure: () => {
 
     }
 
