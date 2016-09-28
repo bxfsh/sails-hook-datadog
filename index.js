@@ -16,7 +16,7 @@ module.exports = function (sails) {
       var version = package.version;
       var hostName = os.hostname();
       var tags = [
-        `${name}_${sails.config.env}`,
+        `${name}_${sails.config.environment}`,
         `host: ${hostName}`,
         `version: ${version}`
       ];
@@ -47,7 +47,7 @@ module.exports = function (sails) {
 
         var errorLogMessage = sails.log.error;
         sails.log.error = function() {
-          var args = [(new Date().toISOString() + ':').red];
+          var args = [(new Date().toISOString() + ':')];
           for (var i = 0; i < arguments.length; i++) {
             args.push(arguments[i]);
           };
@@ -56,7 +56,7 @@ module.exports = function (sails) {
 
           // sending datadog event if active
           if (sails.config.datadog.active) {
-            var title =  `ERROR: ${name} ${sails.config.env}`;
+            var title =  `ERROR: ${name} ${sails.config.environment}`;
             var text = JSON.stringify(args) + (new Error().stack);
             var properties = {
               tags: tags,
@@ -78,7 +78,7 @@ module.exports = function (sails) {
         var infoLogMessage = sails.log.info;
         sails.log.info = function() {
 
-          var args = [(new Date().toISOString() + ':').cyan];
+          var args = [(new Date().toISOString() + ':')];
           for (var i = 0; i < arguments.length; i++) {
             args.push(arguments[i]);
           };
@@ -86,7 +86,7 @@ module.exports = function (sails) {
 
           // sending datadog event if active
           if (sails.config.datadog.active) {
-            var title =  `INFO: ${name} ${sails.config.env}`;
+            var title =  `INFO: ${name} ${sails.config.environment}`;
             var text = JSON.stringify(args);
             var properties = {
               tags: tags,
@@ -103,14 +103,14 @@ module.exports = function (sails) {
 
         sails.log.success = function() {
 
-          var args = [(new Date().toISOString() + ':').cyan];
+          var args = [(new Date().toISOString() + ':')];
           for (var i = 0; i < arguments.length; i++) {
             args.push(arguments[i]);
           };
 
           // sending datadog event if active
           if (sails.config.datadog.active) {
-            var title = `SUCCESS: ${name} ${sails.config.env}`;
+            var title = `SUCCESS: ${name} ${sails.config.environment}`;
             var text = JSON.stringify(args);
             var properties = {
               tags: tags,
@@ -128,7 +128,8 @@ module.exports = function (sails) {
       overrideInfoLog();
       createSuccessLog();
 
-      sails.log.info('[sails-hook-datadog]', `${name} datadog has been initialised`)
+      sails.log.info(
+        '[sails-hook-datadog]', `${name} ${version} ${sails.config.environment}`);
 
       return cb();
     },
