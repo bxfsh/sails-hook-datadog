@@ -1,6 +1,6 @@
 {
-  "name": "@bxfsh/sails-hook-datadog",
-  "version": "1.0.1",
+  "name": "sails-hook-datadog",
+  "version": "1.0.2",
   "description": "connect sails logs and datadog events",
   "main": "index.js",
   "scripts": {
