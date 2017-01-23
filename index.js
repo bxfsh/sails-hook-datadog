@@ -11,7 +11,7 @@ module.exports = function (sails) {
     initialize: function(cb) {
 
       // getting name and version from the parent package.json
-      var package = require('../../../package.json')
+      var package = require('../../package.json')
       var name = package.name;
       var version = package.version;
       var hostName = os.hostname();
